@@ -4,11 +4,14 @@ import Collapse from "@kunukn/react-collapse";
 import Down from "./Down";
 
 const ls = ['BTC-USD', 'ETH', 'AMZN']
+const indicators_list = ['sma', 'bbands']
 
 export default function RunBacktest({setIsLoading}) {
     const [initCash, setinitCash] = useState(1000)
     const [coins, setCoins] = useState([])
+    const [indicators, setIndicators] = useState([])
     const [selectedCoin, setSelectedCoin] = useState('')
+    const [selectedindicator, setSelectedIndicator] = useState('')
     const [startDate, setStartDate] = useState('2022-10-13')
     const [endDate, setEndDate] = useState('2022-10-15')
 
@@ -18,6 +21,8 @@ export default function RunBacktest({setIsLoading}) {
     useEffect(()=>{
         setCoins(ls)
         setSelectedCoin(ls[0])
+        setIndicators(indicators_list)
+        setSelectedIndicator(indicators_list[0])
     },[])
 
 
@@ -32,6 +37,9 @@ export default function RunBacktest({setIsLoading}) {
     }
     const handleChange = (event) => {
         setSelectedCoin(event.target.value);
+    };
+    const handleIndicatorChange = (event) => {
+        setSelectedIndicator(event.target.value);
     };
     async function runTest(){
 
@@ -69,7 +77,9 @@ export default function RunBacktest({setIsLoading}) {
     <div>
         <div className="backtest-form">
             <form>
-                <Dropdown label="Select coin" value={selectedCoin} onChange={handleChange} options={coins}/>
+                <Dropdown label="Select Coin" value={selectedCoin} onChange={handleChange} options={coins}/>
+                <br />
+                <Dropdown label="Select Inidcator" value={selectedindicator} onChange={handleIndicatorChange} options={indicators}/>
                 <br />
                 <span>Initial Cash:</span>
                 <input type="number" min="100" value={initCash} onChange={initCashOnChange} placeholder='Initial Cash:' required/>

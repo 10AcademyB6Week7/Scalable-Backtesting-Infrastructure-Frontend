@@ -45,12 +45,17 @@ input, select {
     /* display: flex;
     justify-content: center;
     align-items: center; */
-    width: 10px;
-    height: 10px;
+    max-width: 30px;
+    max-height: 30px;
     position: absolute;
     top: 35%;
-    left: 35%;
+    left: 42%;
 
+}
+.loading img{
+  /* background-color: red; */
+  max-width: 100px;
+  max-height: 100px;
 }
 
 /* .btn{

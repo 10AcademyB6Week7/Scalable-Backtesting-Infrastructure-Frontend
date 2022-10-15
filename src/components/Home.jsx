@@ -6,6 +6,7 @@ import loading from '../loading2.gif';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import RunBacktest from './run_backtest/RunBacktest';
+import History from './history/History';
 
 
 const BASE_URL = "http://127.0.0.1:8000/api"
@@ -13,7 +14,7 @@ const BASE_URL = "http://127.0.0.1:8000/api"
 
 
 
-function Home({isLoggedIn, setIsLoggedIn}) {
+function Home({isLoggedIn, setIsLoggedIn, User}) {
     // const [response, setResponse] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     const [isAccountSelected, setIsAccountSelected] = useState(false)
@@ -185,24 +186,6 @@ function Home({isLoggedIn, setIsLoggedIn}) {
         setIsTrainee(false)
     }
 
-    if(isTrainee){
-        return (
-            <div className="home-div">
-                <button onClick={logout} className='logoutbtn'>Logout</button>
-                <button onClick={create_asset_request} className='btn'>Request Asset</button>
-                <Trainee address={selectedAccount}/>
-            </div>
-        )
-
-    }
-    if(isAdmin){
-        return(
-            <div className="home-div">
-                <button onClick={logout} className='logoutbtn'>Logout</button>
-                <Admin address={selectedAccount}/>
-            </div>
-        )
-    }
 
     return (
         <div className='home-div'>
@@ -210,6 +193,7 @@ function Home({isLoggedIn, setIsLoggedIn}) {
                 <div className='loading'>
                     <img src={loading}></img>
                 </div>}
+                <span>Welcome to MeLa: <strong>{User.first_name} {User.last_name}</strong></span>
             <Tabs>
                 <TabList style={{backgroundColor:'white'}}>
                     <Tab>Run Backtest</Tab>
@@ -223,7 +207,7 @@ function Home({isLoggedIn, setIsLoggedIn}) {
                 </TabPanel>
                 <TabPanel>
                     <h2>History</h2>
-                    
+                    <History User={User} setIsLoading={setIsLoading}/>
                 </TabPanel>
                 <TabPanel>
                     <h2>Account</h2>

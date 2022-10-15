@@ -5,12 +5,14 @@ import {useState, useEffect}  from 'react'
 import Index from './components/index/Index';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
+import  bg from './header-2.png'
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isRegisterring, setIsRegisterring] = useState(false)
   const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const [user, setUser] = useState(null)
 
 
   function handleLogIn(){
@@ -27,6 +29,11 @@ function App() {
   function handleHome(){
     setIsRegisterring(false)
     setIsLoggingIn(false)
+  }
+  function login(user){
+    setIsLoggingIn(false)
+    setUser(user)
+    setIsLoggedIn(true)
   }
 
   if(isRegisterring){
@@ -58,7 +65,7 @@ function App() {
           <li><button className='homebtn' onClick={handleHome} >Mela</button></li>
         </ul>
         <div className="App">
-          <Login setIsloggedIn={setIsLoggedIn} setIsLoggingIn={setIsLoggingIn} setIsRegisterring={setIsRegisterring}/>
+          <Login login={login} setIsLoggingIn={setIsLoggingIn} setIsRegisterring={setIsRegisterring}/>
         </div>
       </>
     )
@@ -85,7 +92,7 @@ function App() {
       </div>
       <div className="App">
         {isLoggedIn?
-        <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>:<Index isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} User={user}/>:<Index isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
         }
         
       </div>
