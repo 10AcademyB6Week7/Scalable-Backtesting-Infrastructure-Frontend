@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react'
 import './RunBacktest.css'
 import Collapse from "@kunukn/react-collapse";
 import Down from "./Down";
+import axios from 'axios'
 
-const ls = ['BTC-USD', 'ETH', 'AMZN']
-const indicators_list = ['sma', 'bbands']
 
-export default function RunBacktest({setIsLoading}) {
+const ls = ['BTC-USD', 'AMZN']
+const indicators_list = ['bbands', 'sma']
+
+const BASE_URL = "http://localhost:5000"
+
+export default function RunBacktest({setIsLoading, User}) {
     const [initCash, setinitCash] = useState(1000)
     const [coins, setCoins] = useState([])
     const [indicators, setIndicators] = useState([])
@@ -41,7 +45,36 @@ export default function RunBacktest({setIsLoading}) {
     const handleIndicatorChange = (event) => {
         setSelectedIndicator(event.target.value);
     };
-    async function runTest(){
+    async function runTest(e){
+        e.preventDefault()
+        try{
+            setIsLoading(true)
+            let response = await axios.post(`${BASE_URL}/get_backtest_scene`, {
+                "start_date":startDate,
+                "end_date":endDate,
+                "indicator":selectedindicator,
+                "initial_cash":initCash,
+                "stock":selectedCoin,
+                "user_id":User.id,
+            })
+            console.log(response.data)
+            let data = response.data;
+            if(data!==undefined){
+                if(data.success){
+                    alert(data.message)
+                }else{
+                    alert(data.error)
+                }
+            }
+            else{
+                alert("Something went wrong")
+            }
+        }catch(e){
+            console.log(e)
+            alert(e.message)
+        }finally{
+            setIsLoading(false)
+        }
 
     }
 

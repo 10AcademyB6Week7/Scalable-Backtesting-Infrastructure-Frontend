@@ -1,0 +1,11 @@
+.index-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+.h2{
+    font-size: 1.8rem;
+}

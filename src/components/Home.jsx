@@ -203,7 +203,7 @@ function Home({isLoggedIn, setIsLoggedIn, User}) {
                 </TabList>
                 <TabPanel>
                     <h2>Run Backtest</h2>
-                    <RunBacktest setIsLoading={setIsLoading}/>
+                    <RunBacktest setIsLoading={setIsLoading} User={User}/>
                 </TabPanel>
                 <TabPanel>
                     <h2>History</h2>

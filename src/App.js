@@ -47,7 +47,7 @@ function App() {
           </li>
           <li><button className='homebtn' onClick={handleHome} >Mela</button></li>
         </ul>
-        <div className="App">
+        <div className="home-app">
           <Register setIsRegisterring={setIsRegisterring} setIsLoggingIn={setIsLoggingIn}/>
         </div>
       </>
@@ -64,7 +64,7 @@ function App() {
           </li>
           <li><button className='homebtn' onClick={handleHome} >Mela</button></li>
         </ul>
-        <div className="App">
+        <div className="home-app">
           <Login login={login} setIsLoggingIn={setIsLoggingIn} setIsRegisterring={setIsRegisterring}/>
         </div>
       </>
@@ -90,9 +90,12 @@ function App() {
           </div>
         </ul>
       </div>
-      <div className="App">
+      <div>
         {isLoggedIn?
-        <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} User={user}/>:<Index isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        <div className="home-app">
+          <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} User={user}/>
+        </div>
+        :<Index isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
         }
         
       </div>
