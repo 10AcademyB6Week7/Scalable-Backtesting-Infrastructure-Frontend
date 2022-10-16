@@ -7,6 +7,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import RunBacktest from './run_backtest/RunBacktest';
 import History from './history/History';
+import Account from './account/Account';
 
 
 const BASE_URL = "http://127.0.0.1:8000/api"
@@ -211,7 +212,7 @@ function Home({isLoggedIn, setIsLoggedIn, User}) {
                 </TabPanel>
                 <TabPanel>
                     <h2>Account</h2>
-                    
+                    <Account User={User}/>
                 </TabPanel>
                 <TabPanel>
                     <h2>Upgrade plan</h2>
